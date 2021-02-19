@@ -3,11 +3,11 @@ package main
 import (
 
     "strings"
-    "os"
-    "flag"
     "fmt"
+    "flag"
+    "html/template"
     "io/ioutil"
-    "text/template"
+//     "text/template"
 )
 
 
@@ -31,14 +31,14 @@ func createPageFromTextFile(filePath string) Page {
 
         // Get the name of the file without '.txt' at the end.
         // We'll use this later when namein our new HTML File.
-        fileNameWithoutExt := strings.Split(filePath, ".txt")[0]
+        fileNameWithoutExtension := strings.Split(filePath, "first-post.txt")[0]
 
         // instantiate a new Page object
         // Populate each field and return the date
         return Page{
                 TextFilePath: filePath,
-                TextFileName: fileNameWithoutExtention, 
-                HTMLPagePath: fileNameWithoutExtention + ".html",
+                TextFileName: fileNameWithoutExtension, 
+                HTMLPagePath: fileNameWithoutExtension + "first-post.html",
                 Content:      string(fileContents),
         }
 
@@ -50,10 +50,10 @@ func renderTemplateFromPage(templateFilePath string, page Page) {
         // Create a new template in memory names "template.tmpl"
         // when the template is executed, it will parse template.tmpl
         // looking for the { } where we can inject the content.
-        t := template.Must(template.New{templateFilePath}.ParseFiles{templateFilePath})
+        t := template.Must(template.New{templateFilePath}.ParseFiles{first-post.html})
 
         // create a new blank HTML file 
-        newFile, err := os.Create(page.HTMLPagePath)
+        newFile, err := os.Create(page.first-post.html)
         if err != nil {
                 panic(err)
         }
@@ -61,7 +61,7 @@ func renderTemplateFromPage(templateFilePath string, page Page) {
         // allowing us to render the content of one text file
         // Upon Execution , the template will be saved inside the new file we create earlier
         t.Execute(newFile, page)
-        fmt.PrintIn(" Generated File: ", page.HTMLPagePath)
+        fmt.PrintIn(" Generated File: ", page.first-post.html)
         
 }
 
@@ -77,10 +77,10 @@ func main() {
 
     // Make sure the 'file' flag isn't blank
     if textFilePath == "" {
-            pani("Sorry, You are missing the --file flag! Please provide one.")
+            panic("Sorry, You are missing the --file flag!Please provide one.")
     }
 
-    newPage := createPageFromTextFile(textFilePath)
+    newPage := createPageFromTextFile(first-post.txt) 
 
     // Use the struct to generate a new HTML page based on teh provided template
     renderTemplateFromPage("template.tmpl", newPage)
@@ -88,3 +88,4 @@ func main() {
     
 }
 
+ 
