@@ -72,10 +72,10 @@ func main() {
 		textFilepath = *fileFlag
 	}
 
-	// // Make sure the 'file' flag isn't blank
-	// if textFilePath == "" {
-	// 	panic("Sorry, You are missing the --file flag!Please provide one.")
-	// }
+	// Make sure the 'file' flag isn't blank
+	if *fileFlag == "" {
+		panic("Sorry, You are missing the --file flag!Please provide one.")
+	}
 
 	newPage := createPageFromTextFile(textFilepath)
 
